@@ -14,15 +14,32 @@ form.addEventListener("submit", (event) => {
 
   const nombreValue = nombre_input.value;
   const generoValue = genero_input.value;
-  const edadValue = parseInt(edad_input.value); // Aseguramos que la edad sea un número
+  const edadValue = parseInt(edad_input.value); 
+
+  // Documento que nos proporciono
+  let fechaActual = new Date();
+  let horaActual = fechaActual.getHours();
+
+  let saludoHora;
+  if (horaActual >= 6 && horaActual < 12) {
+    saludoHora = "Buenos días";
+  } else if (horaActual >= 12 && horaActual < 18) {
+    saludoHora = "Buenas tardes";
+  } else {
+    saludoHora = "Buenas noches";
+  }
+
+  let mensajeSaludo = saludoHora + ", ";
 
   if (generoValue === "f" && edadValue >= 30) {
-    div.innerHTML = "<p>Hola Sra. " + Saludar(nombreValue, generoValue) + "</p>";
+    mensajeSaludo += "Sra. " + Saludar(nombreValue, generoValue);
   } else if (generoValue === "f" && edadValue < 30) {
-    div.innerHTML = "<p>Hola amiga " + Saludar(nombreValue, generoValue) + "</p>";
+    mensajeSaludo += "amiga " + Saludar(nombreValue, generoValue);
   } else if (generoValue === "m" && edadValue >= 30) {
-    div.innerHTML = "<p>Hola Sr. " + Saludar(nombreValue, generoValue) + "</p>";
+    mensajeSaludo += "Sr. " + Saludar(nombreValue, generoValue);
   } else {
-    div.innerHTML = "<p>Hola amigo " + Saludar(nombreValue, generoValue) + "</p>";
+    mensajeSaludo += "amigo " + Saludar(nombreValue, generoValue);
   }
+
+  div.innerHTML = "<p>" + mensajeSaludo + "</p>";
 });
